@@ -2,6 +2,15 @@
 
 pushd /root
 
+# Install ipython for our tutorial.
+easy_install ipython
+
+for node in $SLAVES $OTHER_MASTERS; do
+  echo $node
+  ssh -t -t $SSH_OPTS root@$node "easy_install ipython" & sleep 0.3
+done
+wait
+
 ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 rm -rf training
 git clone git@github.com:amplab/training.git
