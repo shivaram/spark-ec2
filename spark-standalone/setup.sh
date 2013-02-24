@@ -2,9 +2,14 @@
 
 cp /root/spark-ec2/slaves /root/spark/conf/
 
+# Copy hdfs core-site to get fs.default.name in class path
+cp /root/ephemeral-hdfs/conf/core-site.xml /root/spark/conf/
+
 # Set cluster-url to standalone master
 echo "spark://""`cat /root/spark-ec2/masters`"":7077" > /root/spark-ec2/cluster-url
 cp -f /root/spark-ec2/cluster-url /root/mesos-ec2/cluster-url
+
+
 /root/spark-ec2/copy-dir /root/spark-ec2
 /root/spark-ec2/copy-dir /root/mesos-ec2
 /root/spark-ec2/copy-dir /root/spark/conf
