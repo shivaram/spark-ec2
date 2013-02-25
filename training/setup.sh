@@ -21,7 +21,7 @@ wait
 
 ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 rm -rf training
-git clone git@github.com:amplab/training.git
+git clone https://github.com/amplab/training.git
 
 pushd training
 /root/spark-ec2/copy-dir /root/training 
