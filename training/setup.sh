@@ -12,6 +12,13 @@ pushd /root
 #done
 #wait
 
+yum install -y numpy
+for node in $SLAVES $OTHER_MASTERS; do
+  echo $node
+  ssh -t -t $SSH_OPTS root@$node "yum install -y numpy" & sleep 0.3
+done
+wait
+
 ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 rm -rf training
 git clone git@github.com:amplab/training.git
