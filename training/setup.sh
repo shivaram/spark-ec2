@@ -58,3 +58,11 @@ if [[ "$HADOOP_VERSION" != "0.20.205.0" ]]; then
   /root/spark-ec2/copy-dir /root/spark
   popd
 fi
+
+# Hack to delete example sources and doc jar which causes a bug in run
+pushd /root/spark
+rm -f examples/target/scala-2.9.2/spark-examples_2.9.2-0.7.0-SNAPSHOT-javadoc.jar
+rm -f examples/target/scala-2.9.2/spark-examples_2.9.2-0.7.0-SNAPSHOT-sources.jar
+/root/ephemeral-hdfs/bin/slaves.sh "rm -f /root/spark/examples/target/scala-2.9.2/spark-examples_2.9.2-0.7.0-SNAPSHOT-javadoc.jar"
+/root/ephemeral-hdfs/bin/slaves.sh "rm -f /root/spark/examples/target/scala-2.9.2/spark-examples_2.9.2-0.7.0-SNAPSHOT-sources.jar"
+popd
