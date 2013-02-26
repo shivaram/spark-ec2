@@ -31,10 +31,10 @@ pushd training
 #cp -r java-app-template /root/
 #cp -r scala-app-template /root/
 
-ln -s /root/training/streaming /root/streaming
-ln -s /root/training/kmeans /root/kmeans
-ln -s /root/training/java-app-template /root/java-app-template
-ln -s /root/training/scala-app-template /root/scala-app-template
+ln -f -s /root/training/streaming /root/streaming
+ln -f -s /root/training/kmeans /root/kmeans
+ln -f -s /root/training/java-app-template /root/java-app-template
+ln -f -s /root/training/scala-app-template /root/scala-app-template
 
 popd
 popd
