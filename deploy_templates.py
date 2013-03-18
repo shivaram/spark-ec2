@@ -45,6 +45,8 @@ template_vars = {
   "hdfs_data_dirs": os.getenv("MESOS_HDFS_DATA_DIRS"),
   "mapred_local_dirs": os.getenv("MESOS_MAPRED_LOCAL_DIRS"),
   "spark_local_dirs": os.getenv("MESOS_SPARK_LOCAL_DIRS"),
+  "s3n_awsAccessKeyId": os.getenv("AWS_ACCESS_KEY_ID"),
+  "s3n_awsSecretAccessKey": os.getenv("AWS_SECRET_ACCESS_KEY"),
   "default_spark_mem": "%dm" % spark_mb
 }
 
