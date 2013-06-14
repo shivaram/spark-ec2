@@ -34,7 +34,7 @@ DOWNLOADED=0
 if [[ "$MESOS_DOWNLOAD_METHOD" == "git" ]] ; then
   # change git's ssh command so it does not ask to accept a keys
   export GIT_SSH=/root/spark-ec2/ssh-no-keychecking.sh
-  REPOSITORY=git://github.com/apache/mesos.git
+  REPOSITORY=git://github.com/apache/incubator-mesos.git
   echo "Checking out Mesos from $REPOSITORY"
   pushd /root > /dev/null 2>&1
   rm -rf mesos mesos.tgz
