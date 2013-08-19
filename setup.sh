@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Make sure we are in the spark-ec2 directory
-cd /root/spark-ec2
+# Make sure we are in the spark-openstack directory
+cd /root/spark-openstack
 
 # Load the environment variables specific to this AMI
 source /root/.bash_profile
@@ -35,7 +35,7 @@ MASTERS=`cat masters`
 NUM_MASTERS=`cat masters | wc -l`
 OTHER_MASTERS=`cat masters | sed '1d'`
 SLAVES=`cat slaves`
-SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=5"
+SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5"
 
 if [[ "x$JAVA_HOME" == "x" ]] ; then
     echo "Expected JAVA_HOME to be set in .bash_profile!"
@@ -92,21 +92,21 @@ while [ "e$TODO" != "e" ] && [ $TRIES -lt 4 ] ; do
   fi
 done
 
-echo "RSYNC'ing /root/spark-ec2 to other cluster nodes..."
+echo "RSYNC'ing /root/spark-openstack to other cluster nodes..."
 for node in $SLAVES $OTHER_MASTERS; do
   echo $node
-  rsync -e "ssh $SSH_OPTS" -az /root/spark-ec2 $node:/root &
+  rsync -e "ssh $SSH_OPTS" -az /root/spark-openstack $node:/root &
   scp $SSH_OPTS ~/.ssh/id_rsa $node:.ssh &
   sleep 0.3
 done
 wait
 
-# NOTE: We need to rsync spark-ec2 before we can run setup-slave.sh
+# NOTE: We need to rsync spark-openstack before we can run setup-slave.sh
 # on other cluster nodes
 echo "Running slave setup script on other cluster nodes..."
 for node in $SLAVES $OTHER_MASTERS; do
   echo $node
-  ssh -t -t $SSH_OPTS root@$node "spark-ec2/setup-slave.sh" & sleep 0.3
+  ssh -t -t $SSH_OPTS root@$node "spark-openstack/setup-slave.sh" & sleep 0.3
 done
 wait
 
@@ -133,7 +133,7 @@ echo "Creating local config files..."
 # Copy spark conf by default
 echo "Deploying Spark config files..."
 chmod u+x /root/spark/conf/spark-env.sh
-/root/spark-ec2/copy-dir /root/spark/conf
+/root/spark-openstack/copy-dir /root/spark/conf
 
 # Setup each module
 for module in $MODULES; do

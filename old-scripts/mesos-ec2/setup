@@ -59,7 +59,7 @@ PERSISTENT_HDFS=/root/persistent-hdfs
 #         platforms
 JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk.x86_64
 
-SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=5"
+SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5"
 
 if [[ `tty` == "not a tty" ]] ; then
     echo "Expecting a tty or pty! (use the ssh -t option)."
@@ -154,7 +154,7 @@ if [[ "$DOWNLOAD_METHOD" == "git" ]] ; then
   echo "Checking out Mesos from $REPOSITORY"
   pushd /root > /dev/null 2>&1
   rm -rf mesos mesos.tgz
-  # Set git SSH command to a script that uses -o StrictHostKeyChecking=no
+  # Set git SSH command to a script that uses -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
   git clone $REPOSITORY mesos
   pushd mesos 2>&1
   git checkout -b $BRANCH --track origin/$BRANCH

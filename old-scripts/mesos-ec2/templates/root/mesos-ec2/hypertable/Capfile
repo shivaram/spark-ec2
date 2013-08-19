@@ -74,7 +74,7 @@ set :config_option, \
     (default-#{install_dir})
  DESC
 task :copy_config_local, :roles => :localhost do
-  run("rsync -e \"ssh -o StrictHostKeyChecking=no\" #{config} #{install_dir}/#{hypertable_version}/conf")
+  run("rsync -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" #{config} #{install_dir}/#{hypertable_version}/conf")
 end
  
  desc <<-DESC
@@ -85,7 +85,7 @@ end
  DESC
 task :push_config_all do
    run <<-CMD
-     rsync -av -e "ssh -o StrictHostKeyChecking=no" --exclude=log --exclude=run --exclude=demo --exclude=fs --exclude=hyperspace #{source_machine}:#{install_dir}/#{hypertable_version}/conf/ #{install_dir}/#{hypertable_version}/conf 
+     rsync -av -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --exclude=log --exclude=run --exclude=demo --exclude=fs --exclude=hyperspace #{source_machine}:#{install_dir}/#{hypertable_version}/conf/ #{install_dir}/#{hypertable_version}/conf
   CMD
 end
 
@@ -106,8 +106,8 @@ end
  DESC
 task :rsync do
   run <<-CMD
-     rsync -av -e "ssh -o StrictHostKeyChecking=no" --exclude=log --exclude=run --exclude=demo --exclude=fs --exclude=conf --exclude=hyperspace #{source_machine}:#{install_dir}/#{hypertable_version} #{install_dir} &&
-     rsync -av -e "ssh -o StrictHostKeyChecking=no" --exclude=log --exclude=run --exclude=demo --exclude=fs --exclude=hyperspace #{source_machine}:#{install_dir}/#{hypertable_version}/conf/ #{install_dir}/#{hypertable_version}/conf 
+     rsync -av -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --exclude=log --exclude=run --exclude=demo --exclude=fs --exclude=conf --exclude=hyperspace #{source_machine}:#{install_dir}/#{hypertable_version} #{install_dir} &&
+     rsync -av -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --exclude=log --exclude=run --exclude=demo --exclude=fs --exclude=hyperspace #{source_machine}:#{install_dir}/#{hypertable_version}/conf/ #{install_dir}/#{hypertable_version}/conf
   CMD
 end
 
@@ -156,7 +156,7 @@ task :install_package, :roles => [:master, :hyperspace, :slave, :thriftbroker, :
   if (/-#{hypertable_version}-/ =~ pkg_basename).nil?
     raise "Package #{pkg} doesn't match version #{hypertable_version}"
   end
-    run("rsync -e \"ssh -o StrictHostKeyChecking=no\" #{source_machine}:#{pkg} #{install_dir}/")
+    run("rsync -e \"ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null\" #{source_machine}:#{pkg} #{install_dir}/")
    
   if (pkg_type == "deb")
     run("dpkg -i #{install_dir}/#{pkg_basename} && rm #{install_dir}/#{pkg_basename}") 
