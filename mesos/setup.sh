@@ -33,12 +33,12 @@ DOWNLOADED=0
 
 if [[ "$MESOS_DOWNLOAD_METHOD" == "git" ]] ; then
   # change git's ssh command so it does not ask to accept a keys
-  export GIT_SSH=/root/spark-ec2/ssh-no-keychecking.sh
+  export GIT_SSH=/root/spark-openstack/ssh-no-keychecking.sh
   REPOSITORY=git://github.com/apache/mesos.git
   echo "Checking out Mesos from $REPOSITORY"
   pushd /root > /dev/null 2>&1
   rm -rf mesos mesos.tgz
-  # Set git SSH command to a script that uses -o StrictHostKeyChecking=no
+  # Set git SSH command to a script that uses -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
   git clone $REPOSITORY mesos
   pushd mesos 2>&1
   git checkout -b $BRANCH --track origin/$BRANCH
@@ -72,13 +72,13 @@ if [[ "$DOWNLOADED" == "1" ]] ; then
 fi
 
 echo "Setting up Hadoop framework config files..."
-cp /root/spark-ec2/mesos/hadoop-framework-conf/* /root/hadoop-mesos/conf
+cp /root/spark-openstack/mesos/hadoop-framework-conf/* /root/hadoop-mesos/conf
 
 echo "Deploying Hadoop framework config files..."
-/root/spark-ec2/copy-dir /root/hadoop-mesos/conf
+/root/spark-openstack/copy-dir /root/hadoop-mesos/conf
 
 echo "Redeploying /root/mesos..."
-/root/spark-ec2/mesos/redeploy-mesos
+/root/spark-openstack/mesos/redeploy-mesos
 
 if [[ $NUM_ZOOS != 0 ]]; then
   echo "Starting ZooKeeper quorum..."
@@ -90,8 +90,8 @@ if [[ $NUM_ZOOS != 0 ]]; then
 fi
 
 echo "Stopping any existing Mesos cluster..."
-/root/spark-ec2/mesos/stop-mesos
+/root/spark-openstack/mesos/stop-mesos
 sleep 2
 
 echo "Starting Mesos cluster..."
-/root/spark-ec2/mesos/start-mesos
+/root/spark-openstack/mesos/start-mesos
