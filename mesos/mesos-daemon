@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set MESOS_PUBLIC_DNS so slaves can be linked in master web UI
-export MESOS_PUBLIC_DNS=`wget -q -O - http://instance-data.ec2.internal/latest/meta-data/public-hostname`
+export MESOS_PUBLIC_DNS=`wget -q -O - http://169.254.169.254/latest/meta-data/public-hostname`
 
 # Set PATH to include Scala
 export PATH=$PATH:/root/scala-2.9.1.final/bin
