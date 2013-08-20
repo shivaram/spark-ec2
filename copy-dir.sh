@@ -9,9 +9,9 @@ DIR=`readlink -f "$1"`
 DIR=`echo "$DIR"|sed 's@/$@@'`
 DEST=`dirname "$DIR"`
 
-SLAVES=`cat /root/spark-ec2/slaves`
+SLAVES=`cat /root/spark-openstack/slaves`
 
-SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=5"
+SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5"
 
 echo "RSYNC'ing $DIR to slaves..."
 for slave in $SLAVES; do

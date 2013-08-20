@@ -6,7 +6,7 @@ from __future__ import with_statement
 import os
 import sys
 
-# Deploy the configuration file templates in the spark-ec2/templates directory
+# Deploy the configuration file templates in the spark-openstack/templates directory
 # to the root filesystem, substituting variables such as the master hostname,
 # ZooKeeper URL, etc as read from the environment.
 
@@ -16,9 +16,9 @@ mem_command = "cat /proc/meminfo | grep MemTotal | awk '{print $2}'"
 master_ram_kb = int(
   os.popen(mem_command).read().strip())
 # This is the master's memory. Try to find slave's memory as well
-first_slave = os.popen("cat /root/spark-ec2/slaves | head -1").read().strip()
+first_slave = os.popen("cat /root/spark-openstack/slaves | head -1").read().strip()
 
-slave_mem_command = "ssh -t -o StrictHostKeyChecking=no %s %s" %\
+slave_mem_command = "ssh -t -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null %s %s" %\
         (first_slave, mem_command)
 slave_ram_kb = int(os.popen(slave_mem_command).read().strip())
 
@@ -50,7 +50,7 @@ template_vars = {
   "java_home": os.getenv("JAVA_HOME")
 }
 
-template_dir="/root/spark-ec2/templates"
+template_dir="/root/spark-openstack/templates"
 
 for path, dirs, files in os.walk(template_dir):
   if path.find(".svn") == -1:

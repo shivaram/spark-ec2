@@ -1,10 +1,10 @@
 #!/bin/bash
-cd /root/spark-ec2
+cd /root/spark-openstack
 
 MASTERS=`cat masters`
 SLAVES=`cat slaves`
 
-SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=5"
+SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5"
 
 for slave in $SLAVES; do
   echo "Stopping slave on $slave"

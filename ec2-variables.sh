@@ -2,7 +2,7 @@
 
 # These variables should be set before running setup.sh.
 # TODO: These variables are called MESOS_* for backwards compatibility. Remove
-# the prefix once we change spark_ec2.py
+# the prefix once we change spark_openstack.py
 export MESOS_MASTERS=""
 export MESOS_SLAVES=""
 export MESOS_HDFS_DATA_DIRS="/mnt/ephemeral-hdfs/data,/mnt2/ephemeral-hdfs/data"
