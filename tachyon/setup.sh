@@ -6,4 +6,4 @@
 
 sleep 1
 
-/root/tachyon/bin/start.sh all Mount
+bash -x /root/tachyon/bin/start.sh all Mount
