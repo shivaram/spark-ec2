@@ -10,6 +10,7 @@
 #   be in the same format as the JVM's -Xmx option, e.g. 300m or 1g).
 # - SPARK_LIBRARY_PATH, to add extra search paths for native libraries.
 
+export JAVA_HOME="/root/jdk1.7.0_51/"
 export SCALA_HOME="/root/scala"
 
 # Set Spark's memory per machine; note that you can also comment this out
