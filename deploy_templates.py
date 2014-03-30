@@ -55,8 +55,8 @@ template_vars = {
   "hadoop_major_version": os.getenv("HADOOP_MAJOR_VERSION"),
   "java_home": os.getenv("JAVA_HOME"),
   "aws_key_id": os.getenv("AWS_KEY_ID_CONF"),
-  "aws_secret_key": os.getenv("AWS_KEY")
-  "default_tachyon_mem": "%dMB" % tachyon_mb,
+  "aws_secret_key": os.getenv("AWS_KEY"),
+  "default_tachyon_mem": "%dMB" % tachyon_mb
 }
 
 template_dir="/root/spark-ec2/templates"
