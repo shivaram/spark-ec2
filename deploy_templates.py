@@ -54,8 +54,8 @@ template_vars = {
   "shark_version": os.getenv("SHARK_VERSION"),
   "hadoop_major_version": os.getenv("HADOOP_MAJOR_VERSION"),
   "java_home": os.getenv("JAVA_HOME"),
-  "aws_key_id": os.getenv("AWS_KEY_ID_CONF"),
-  "aws_secret_key": os.getenv("AWS_KEY"),
+  "aws_key_id": os.getenv("AWS_KEY_ID_CONF", ""),
+  "aws_secret_key": os.getenv("AWS_KEY_CONF", ""),
   "default_tachyon_mem": "%dMB" % tachyon_mb
 }
 
