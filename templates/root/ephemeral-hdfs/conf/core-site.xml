@@ -45,4 +45,8 @@
     <value>tachyon.hadoop.TFS</value>
   </property>
 
+  {{aws_key_id}}
+
+  {{aws_secret_key}}
+
 </configuration>
