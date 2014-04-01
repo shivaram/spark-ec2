@@ -11,6 +11,7 @@ sbt/sbt assembly
 /root/ephemeral-hdfs/bin/stop-mapred.sh
 /root/ephemeral-hdfs/bin/start-mapred.sh
 /root/ephemeral-hdfs/bin/hadoop distcp s3n://imagenet-train/ /imagenet-train
+/root/ephemeral-hdfs/bin/hadoop distcp s3n://imagenet-validation/ /imagenet-validation
 
 # Setup lib and conf correctly
 cp /root/ephemeral-hdfs/conf/core-site.xml /root/pipelines/conf/
