@@ -15,16 +15,16 @@ export SCALA_HOME="/root/scala"
 
 export SPARK_DAEMON_MEMORY=3g
 #export SPARK_WORKER_CORES=5
-#export SPARK_MEM=35553m
+#export SPARK_MEM=41553m
 
 # Set Spark's memory per machine; note that you can also comment this out
 # and have the master's SPARK_MEM variable get passed to the workers.
 export SPARK_MEM={{default_spark_mem}}
 
 # Set JVM options and Spark Java properties
-SPARK_JAVA_OPTS+=" -Dspark.local.dir={{spark_local_dirs}} -Dspark.storage.blockManagerTimeoutIntervalMs=1200000 -Dspark.storage.memoryFraction=0.8 -Dspark.speculation=true"
-SPARK_JAVA_OPTS+=" -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps "
-#SPARK_JAVA_OPTS+=" -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+UseG1GC"
+SPARK_JAVA_OPTS+=" -Dspark.local.dir={{spark_local_dirs}} -Dspark.storage.blockManagerTimeoutIntervalMs=1200000 -Dspark.storage.memoryFraction=0.8 -Dspark.locality.wait=3000000"
+SPARK_JAVA_OPTS+=" -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+UseG1GC"
+#SPARK_JAVA_OPTS+=" -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps "
 
 export SPARK_JAVA_OPTS
 
