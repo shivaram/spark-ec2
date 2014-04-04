@@ -15,7 +15,8 @@ export SCALA_HOME="/root/scala"
 
 export SPARK_DAEMON_MEMORY=3g
 #export SPARK_WORKER_CORES=5
-#export SPARK_MEM=41553m
+#export SPARK_MEM=42553m
+
 
 # Set Spark's memory per machine; note that you can also comment this out
 # and have the master's SPARK_MEM variable get passed to the workers.
