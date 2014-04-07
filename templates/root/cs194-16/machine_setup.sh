@@ -2,11 +2,9 @@
 
 # Create certificate for the cluster (so we can connect w/ HTTPS and not
 # send cleartext password).
-# Commented out because added certificate to AMI -- too annoying to have to input
-# all of the config things for openssl.
-#pushd /root
-#openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
-#popd
+pushd /root
+openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem -batch
+popd
 
 # Kill all of the existing screens.
 screen -ls | grep Detached | cut -d . -f 1 | awk '{print $1}' | xargs kill
