@@ -13,6 +13,5 @@ ssh-keyscan -H github.com >> /root/.ssh/known_hosts
 
 # Add hdfs to the classpath
 cp /root/ephemeral-hdfs/conf/core-site.xml /root/spark/conf/
-popd
 
 popd
