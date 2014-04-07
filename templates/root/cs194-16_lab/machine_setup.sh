@@ -2,14 +2,17 @@
 
 # Create certificate for the cluster (so we can connect w/ HTTPS and not
 # send cleartext password).
-pushd /root
-openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
-popd
+# Commented out because added certificate to AMI -- too annoying to have to input
+# all of the config things for openssl.
+#pushd /root
+#openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
+#popd
 
 # Create a python profile to use.
 ipython profile create default
 
 PASSWD=`tr -dc A-Za-z0-9_ < /dev/urandom | head -c 8`
+echo "********************************************************"
 echo `wget -q -O - http://169.254.169.254/latest/meta-data/public-hostname` $PASSWD
 python -c "from IPython.lib import passwd; print passwd('$PASSWD')" > /root/.ipython/profile_default/nbpasswd.txt
 
