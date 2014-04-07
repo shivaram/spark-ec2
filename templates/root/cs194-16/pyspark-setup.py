@@ -10,5 +10,6 @@ sys.path.insert(0, '/root/spark/python')
 CLUSTER_URL = open('/root/spark-ec2/cluster-url').read().strip()
 
 from pyspark import SparkContext
-app_name = CLUSTER_URL.split("//")[1].split(".")[0]
+import commands
+app_name = commands.getoutput("wget -q -O - http://169.254.169.254/latest/meta-data/public-hostname")
 sc = SparkContext(CLUSTER_URL, app_name)
