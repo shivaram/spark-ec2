@@ -76,6 +76,3 @@ rm -f /root/.ssh/known_hosts
 
 # Allow memory to be over committed. Helps in pyspark where we fork
 echo 1 > /proc/sys/vm/overcommit_memory
-
-# Start an ipython notebook and print the password.
-/root/cs194-16_lab/machine_setup.sh

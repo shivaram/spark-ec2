@@ -99,11 +99,6 @@ for node in $SLAVES $OTHER_MASTERS; do
 done
 wait
 
-# Copy files for the lab. This needs to happen before setup-slave gets called.
-echo "Copying lab files for CS194-16..."
-chmod u+x /root/cs194-16_lab/machine_setup.sh
-/root/spark-ec2/copy-dir /root/cs194-16_lab
-
 # NOTE: We need to rsync spark-ec2 before we can run setup-slave.sh
 # on other cluster nodes
 echo "Running slave setup script on other cluster nodes..."

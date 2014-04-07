@@ -8,6 +8,9 @@
 #openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out mycert.pem
 #popd
 
+# Kill all of the existing screens.
+screen -ls | grep pts | cut -d. -f1 | awk '{print $1}' | xargs kill
+
 # Create a python profile to use.
 ipython profile create default
 
