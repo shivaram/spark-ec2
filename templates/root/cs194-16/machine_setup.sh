@@ -23,4 +23,7 @@ cp /root/cs194-16/pyspark-setup.py /root/.ipython/profile_default/startup/00-pys
 
 echo "Starting ipython notebook in screen..."
 # Start the screen in detached mode.
+# Be sure to start the notebook in the cs194-16 folder so the notebook for the class shows up.
+pushd /root/cs194-16
 screen -d -m ipython notebook
+popd
