@@ -19,9 +19,9 @@ echo "********************************************************"
 echo `wget -q -O - http://169.254.169.254/latest/meta-data/public-hostname` $PASSWD
 python -c "from IPython.lib import passwd; print passwd('$PASSWD')" > /root/.ipython/profile_default/nbpasswd.txt
 
-cp /root/cs194-16_lab/ipython_notebook_config.py /root/.ipython/profile_default/ipython_notebook_config.py
+cp /root/cs194-16/ipython_notebook_config.py /root/.ipython/profile_default/ipython_notebook_config.py
 # Naming controls order that these scripts are called; use 00 so this comes first.
-cp /root/cs194-16_lab/pyspark-setup.py /root/.ipython/profile_default/startup/00-pyspark-setup.py
+cp /root/cs194-16/pyspark-setup.py /root/.ipython/profile_default/startup/00-pyspark-setup.py
 
 echo "Starting ipython notebook in screen..."
 # Start the screen in detached mode.
