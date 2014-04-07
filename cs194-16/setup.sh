@@ -1,6 +1,6 @@
 #!/bin/bash
 
-chmod u+x /root/cs194-16_lab/machine_setup.sh
+chmod u+x /root/cs194-16/machine_setup.sh
 /root/spark-ec2/copy-dir /root/cs194-16
 
 for slave in $SLAVES; do
