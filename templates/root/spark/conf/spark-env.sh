@@ -15,7 +15,7 @@ export MESOS_NATIVE_LIBRARY=/usr/local/lib/libmesos.so
 
 # Set Spark's memory per machine; this is used only to control the driver's
 # memory.  Executor memory is set using spark.executor.memory.
-export SPARK_MEM=500m
+export SPARK_MEM=1000m
 
 # Set JVM options and Spark Java properties
 SPARK_JAVA_OPTS+=" -Dspark.cores.max=6 -Dspark.executor.memory={{default_spark_mem}} -Dspark.local.dir={{spark_local_dirs}}"

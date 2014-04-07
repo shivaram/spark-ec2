@@ -37,10 +37,10 @@ else:
   spark_mb = max(512, system_ram_mb - 1300)
 # Divide memory by 4, under the assumption that we're running
 # 4 workers per machine and they should all fit.
-# Also subtract 500mb, which is how much we give the driver, to
+# Also subtract 1000mb, which is how much we give the driver, to
 # make sure that everything will fit when we're also running a driver
 # on each worker.
-spark_mb = (spark_mb - 500) / 4
+spark_mb = (spark_mb - 1000) / 4
 
 # Make tachyon_mb as spark_mb for now.
 tachyon_mb = spark_mb
