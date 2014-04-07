@@ -133,6 +133,11 @@ echo "Deploying Spark config files..."
 chmod u+x /root/spark/conf/spark-env.sh
 /root/spark-ec2/copy-dir /root/spark/conf
 
+# Copy files for the lab
+echo "Copying lab files for CS194-16..."
+chmod u+x /root/cs194-16_lab/machine-setup.sh
+/root/spark-ec2/copy-dir /root/cs194-16_lab
+
 # Setup each module
 for module in $MODULES; do
   echo "Setting up $module"

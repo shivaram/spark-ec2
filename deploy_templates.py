@@ -35,6 +35,12 @@ else:
   # Leave 1.3 GB for the OS & co. Note that this must be more than
   # 1 GB because Mesos leaves 1 GB free and requires 32 MB/task.
   spark_mb = max(512, system_ram_mb - 1300)
+# Divide memory by 4, under the assumption that we're running
+# 4 workers per machine and they should all fit.
+# Also subtract 500mb, which is how much we give the driver, to
+# make sure that everything will fit when we're also running a driver
+# on each worker.
+spark_mb = (spark_mb - 500) / 4
 
 # Make tachyon_mb as spark_mb for now.
 tachyon_mb = spark_mb

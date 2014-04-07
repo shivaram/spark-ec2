@@ -13,12 +13,12 @@
 export SCALA_HOME=/root/scala-2.10.3
 export MESOS_NATIVE_LIBRARY=/usr/local/lib/libmesos.so
 
-# Set Spark's memory per machine; note that you can also comment this out
-# and have the master's SPARK_MEM variable get passed to the workers.
-export SPARK_MEM={{default_spark_mem}}
+# Set Spark's memory per machine; this is used only to control the driver's
+# memory.  Executor memory is set using spark.executor.memory.
+export SPARK_MEM=500m
 
 # Set JVM options and Spark Java properties
-SPARK_JAVA_OPTS+=" -Dspark.local.dir={{spark_local_dirs}}"
+SPARK_JAVA_OPTS+=" -Dspark.cores.max=6 -Dspark.executor.memory={{default_spark_mem}} -Dspark.local.dir={{spark_local_dirs}}"
 export SPARK_JAVA_OPTS
  
 # Use the public hostname of this EC2 machine for web UIs.
