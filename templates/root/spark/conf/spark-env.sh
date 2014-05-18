@@ -1,39 +1,19 @@
 #!/usr/bin/env bash
 
-# Set Spark environment variables for your site in this file. Some useful
-# variables to set are:
-# - MESOS_NATIVE_LIBRARY, to point to your Mesos native library (libmesos.so)
-# - SCALA_HOME, to point to your Scala installation
-# - SPARK_CLASSPATH, to add elements to Spark's classpath
-# - SPARK_JAVA_OPTS, to add JVM options
-# - SPARK_MEM, to change the amount of memory used per node (this should
-#   be in the same format as the JVM's -Xmx option, e.g. 300m or 1g).
-# - SPARK_LIBRARY_PATH, to add extra search paths for native libraries.
+export SPARK_LOCAL_DIRS="{{spark_local_dirs}}"
 
-export JAVA_HOME="/root/jdk1.7.0_51/"
-export SCALA_HOME="/root/scala"
-
-export SPARK_DAEMON_MEMORY=3g
+# Standalone cluster options
+export SPARK_MASTER_OPTS="{{spark_master_opts}}"
+export SPARK_WORKER_INSTANCES={{spark_worker_instances}}
+export SPARK_WORKER_CORES={{spark_worker_cores}}
 #export SPARK_WORKER_CORES=5
-#export SPARK_MEM=42553m
-
-
-# Set Spark's memory per machine; note that you can also comment this out
-# and have the master's SPARK_MEM variable get passed to the workers.
-export SPARK_MEM={{default_spark_mem}}
-
-# Set JVM options and Spark Java properties
-SPARK_JAVA_OPTS+=" -Dspark.local.dir={{spark_local_dirs}} -Dspark.storage.blockManagerTimeoutIntervalMs=1200000 -Dspark.storage.memoryFraction=0.8 -Dspark.locality.wait=3000000"
-SPARK_JAVA_OPTS+=" -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+UseG1GC"
-#SPARK_JAVA_OPTS+=" -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCTimeStamps "
-
-export SPARK_JAVA_OPTS
 
 export HADOOP_HOME="/root/ephemeral-hdfs"
-export SPARK_LIBRARY_PATH="/root/pipelines/lib"
 export SPARK_MASTER_IP={{active_master}}
 export MASTER=`cat /root/spark-ec2/cluster-url`
-export SPARK_CLASSPATH=$SPARK_CLASSPATH":/root/ephemeral-hdfs/conf"
+
+export SPARK_SUBMIT_LIBRARY_PATH="/root/pipelines/lib"
+export SPARK_SUBMIT_CLASSPATH=$SPARK_CLASSPATH":/root/ephemeral-hdfs/conf"
 
 # Bind Spark's web UIs to this machine's public EC2 hostname:
 export SPARK_PUBLIC_DNS=`wget -q -O - http://169.254.169.254/latest/meta-data/public-hostname`
