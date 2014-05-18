@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export JAVA_HOME="/root/jdk1.7.0_51"
 export SPARK_LOCAL_DIRS="{{spark_local_dirs}}"
 
 # Standalone cluster options
