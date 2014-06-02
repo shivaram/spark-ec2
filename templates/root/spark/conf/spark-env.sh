@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-export JAVA_HOME="/root/jdk1.7.0_51"
+export JAVA_HOME="{{java_home}}"
 export SPARK_LOCAL_DIRS="{{spark_local_dirs}}"
 
 # Standalone cluster options
 export SPARK_MASTER_OPTS=""
 export SPARK_WORKER_INSTANCES=1
-export SPARK_WORKER_CORES={{spark_worker_cores}}
+export SPARK_WORKER_CORES=5
 #export SPARK_WORKER_CORES=5
 
 export HADOOP_HOME="/root/ephemeral-hdfs"
