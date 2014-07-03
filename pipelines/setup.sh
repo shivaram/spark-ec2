@@ -17,7 +17,7 @@ sbt/sbt assembly
 cp /root/ephemeral-hdfs/conf/core-site.xml /root/pipelines/conf/
 /root/spark-ec2/copy-dir /root/pipelines/conf
 
-cp /root/pipelines/lib/cc2.8xlarge/multi-core/libjblas.so /root/pipelines/lib/
+cp /root/pipelines/lib/openblas/libjblas.so /root/pipelines/lib/
 /root/spark-ec2/copy-dir /root/pipelines/lib
 
 popd

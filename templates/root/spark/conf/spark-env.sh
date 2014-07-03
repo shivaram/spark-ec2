@@ -7,6 +7,7 @@ export SPARK_LOCAL_DIRS="{{spark_local_dirs}}"
 export SPARK_MASTER_OPTS=""
 export SPARK_WORKER_INSTANCES=1
 export SPARK_WORKER_CORES=5
+export OMP_NUM_THREADS=1
 #export SPARK_WORKER_CORES=5
 
 export HADOOP_HOME="/root/ephemeral-hdfs"
