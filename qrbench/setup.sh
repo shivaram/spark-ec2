@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Make sure github is trusted
+cat /root/spark-ec2/github.hostkey >> /root/.ssh/known_hosts
+
 # Checkout prober-bench branch
 
 pushd /root/pipelines
