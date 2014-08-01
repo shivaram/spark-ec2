@@ -28,3 +28,6 @@ make clean
 make
 cp src/main/resources/lib/static/Linux/amd64/sse3/libjblas.so /root/pipelines/lib/
 popd
+
+s3_bucket_name=`ec2-metadata | grep instance-type | awk '{print $2}'`
+s3cmd put s3://jblas/$s3_bucket_name /root/pipelines/lib/libjblas.so
