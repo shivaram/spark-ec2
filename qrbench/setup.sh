@@ -5,9 +5,9 @@
 pushd /root/pipelines
 
 git checkout -- .
+git pull
 git checkout prober-bench
 
-git pull
 sbt/sbt clean assembly
 
 popd
