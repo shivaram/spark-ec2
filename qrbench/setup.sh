@@ -17,20 +17,20 @@ popd
 
 # Build BLAS for this machine
 # TODO: Copy this from s3 ?
-pushd /root/OpenBLAS
-make clean
-make -j4
-rm -rf /root/openblas-install
-make install PREFIX=/root/openblas-install
-
-# Build JBLAS for this machine
-# TODO: Copy this from s3 ?
-pushd /root/jblas
-make clean
-./configure --static-libs --libpath="/root/openblas-install/lib/" --lapack-build
-make
-cp src/main/resources/lib/static/Linux/amd64/sse3/libjblas.so /root/pipelines/lib/
-popd
+#pushd /root/OpenBLAS
+#make clean
+#make -j4
+#rm -rf /root/openblas-install
+#make install PREFIX=/root/openblas-install
+#
+## Build JBLAS for this machine
+## TODO: Copy this from s3 ?
+#pushd /root/jblas
+#make clean
+#./configure --static-libs --libpath="/root/openblas-install/lib/" --lapack-build
+#make
+#cp src/main/resources/lib/static/Linux/amd64/sse3/libjblas.so /root/pipelines/lib/
+#popd
 
 s3_bucket_name=`ec2-metadata | grep instance-type | awk '{print $2}'`
-s3cmd put /root/pipelines/lib/libjblas.so s3://jblas/$s3_bucket_name 
+s3cmd get s3://jblas/$s3_bucket_name /root/pipelines/lib/libjblas.so  
