@@ -32,5 +32,7 @@ popd
 #cp src/main/resources/lib/static/Linux/amd64/sse3/libjblas.so /root/pipelines/lib/
 #popd
 
+rm /root/pipelines/lib/libjblas.so
+
 s3_bucket_name=`ec2-metadata | grep instance-type | awk '{print $2}'`
-s3cmd get s3://jblas/$s3_bucket_name /root/pipelines/lib/libjblas.so  
+s3cmd get s3://jblas/$s3_bucket_name /root/pipelines/lib/libjblas.so
