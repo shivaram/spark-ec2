@@ -42,7 +42,7 @@ mv /root/spark /root/spark-old
 
 mkdir -p /tmp/test
 pushd /tmp/test
-  tar -xf spark-1.1-pipelines.tar.gz
+  tar -xf /root/spark-1.1-pipelines.tar.gz
   cp /root/spark-old/conf/* ./spark/conf/
   mv ./spark /root/spark
 popd
@@ -52,7 +52,7 @@ rm -rf /tmp/test
 /root/ephemeral-hdfs/bin/slaves.sh rm -rf /root/spark
 /root/spark-ec2/copy-dir /root/spark
 
-spark-1.1-pipelines.tar.gz
-spark-1.1-pipelines-m2.tar.gz
+#spark-1.1-pipelines.tar.gz
+#spark-1.1-pipelines-m2.tar.gz
 
 popd
