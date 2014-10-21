@@ -60,4 +60,9 @@
     <value>{{aws_secret_access_key}}</value>
   </property>
 
+  <property>
+    <name>hadoop.security.group.mapping</name>
+    <value>org.apache.hadoop.security.ShellBasedUnixGroupsMapping</value>
+  </property>
+
 </configuration>
