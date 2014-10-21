@@ -37,4 +37,14 @@
     <value>true</value>
   </property>
 
+  <property>
+    <name>yarn.scheduler.maximum-allocation-mb</name>
+    <value>{{system_ram_mb}}</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>{{system_ram_mb}}</value>
+  </property>
+
 </configuration>
