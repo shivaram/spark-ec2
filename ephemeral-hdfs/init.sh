@@ -29,7 +29,7 @@ case "$HADOOP_MAJOR_VERSION" in
     ;;
   yarn)
     # TODO: Replace this with s3 bucket
-    wget http://www.us.apache.org/dist/hadoop/common/hadoop-2.4.0/hadoop-2.4.0.tar.gz
+    wget http://mirror.cogentco.com/pub/apache/hadoop/common/hadoop-2.4.0/hadoop-2.4.0.tar.gz
     echo "Unpacking Hadoop"
     tar xvzf hadoop-*.tar.gz > /tmp/spark-ec2_hadoop.log
     rm hadoop-*.tar.gz
