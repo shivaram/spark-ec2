@@ -14,6 +14,10 @@ cp /root/spark-ec2/slaves /root/spark/conf/
 echo "spark://""`cat /root/spark-ec2/masters`"":7077" > /root/spark-ec2/cluster-url
 /root/spark-ec2/copy-dir /root/spark-ec2
 
+# Symlink the work directory to a local disk to avoid EBS volume filling up
+mkdir -p /mnt/spark/work
+ln -s /mnt/spark/work /root/spark/work
+
 # The Spark master seems to take time to start and workers crash if
 # they start before the master. So start the master first, sleep and then start
 # workers.
