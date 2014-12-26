@@ -9,7 +9,8 @@ pushd /root/pipelines
 #/root/ephemeral-hdfs/bin/hadoop distcp s3n://imagenet-validation/ /imagenet-validation
 
 # Build pipelines
-git checkout -- .
+# git checkout -- .
+git stash
 git pull
 sbt/sbt assembly
 
