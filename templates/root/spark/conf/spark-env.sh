@@ -11,6 +11,8 @@ export HADOOP_HOME="/root/ephemeral-hdfs"
 export SPARK_MASTER_IP={{active_master}}
 export MASTER=`cat /root/spark-ec2/cluster-url`
 
+export OMP_NUM_THREADS=1
+
 export SPARK_SUBMIT_LIBRARY_PATH="$SPARK_SUBMIT_LIBRARY_PATH:/root/ephemeral-hdfs/lib/native/"
 export SPARK_SUBMIT_CLASSPATH="$SPARK_CLASSPATH:$SPARK_SUBMIT_CLASSPATH:/root/ephemeral-hdfs/conf"
 

@@ -94,3 +94,28 @@ for module in $MODULES; do
 done
 
 popd > /dev/null
+
+# Fetch and initialize OpenBLAS
+pushd /root
+
+rm -rf matrix-bench openblas-install
+git clone https://github.com/shivaram/matrix-bench.git
+
+pushd matrix-bench
+bash setup-ec2.sh
+/root/spark-ec2/copy-dir /root/openblas-install
+popd
+
+~/spark/sbin/slaves.sh rm /etc/ld.so.conf.d/atlas-x86_64.conf
+~/spark/sbin/slaves.sh ldconfig
+
+rm /etc/ld.so.conf.d/atlas-x86_64.conf
+ldconfig
+
+~/spark/sbin/slaves.sh ln -sf /root/openblas-install/lib/libblas.so.3 /usr/lib64/liblapack.so.3
+~/spark/sbin/slaves.sh ln -sf /root/openblas-install/lib/libblas.so.3 /usr/lib64/libblas.so.3
+
+ln -sf /root/openblas-install/lib/libblas.so.3 /usr/lib64/liblapack.so.3
+ln -sf /root/openblas-install/lib/libblas.so.3 /usr/lib64/libblas.so.3
+
+popd
