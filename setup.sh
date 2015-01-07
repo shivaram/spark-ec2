@@ -98,6 +98,9 @@ popd > /dev/null
 # Fetch and initialize OpenBLAS
 pushd /root
 
+ln -s /usr/lib64/libgfortran.so.3 /usr/lib64/libgfortran.so
+/root/spark/sbin/slaves.sh ln -s /usr/lib64/libgfortran.so.3 /usr/lib64/libgfortran.so 
+
 rm -rf matrix-bench openblas-install
 git clone https://github.com/shivaram/matrix-bench.git
 
