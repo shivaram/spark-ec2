@@ -1,3 +1,5 @@
+### NOTE: The main repository for spark-ec2 development is https://github.com/mesos/spark-ec2
+
 spark-ec2
 =========
 
