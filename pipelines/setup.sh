@@ -56,4 +56,20 @@ rm -rf /tmp/test
 #spark-1.1-pipelines.tar.gz
 #spark-1.1-pipelines-m2.tar.gz
 
+~/ephemeral-hdfs/bin/slaves.sh rm /etc/ld.so.conf.d/atlas-x86_64.conf
+~/ephemeral-hdfs/bin/slaves.sh ldconfig
+~/ephemeral-hdfs/bin/slaves.sh ln -sf /root/openblas-install/lib/libopenblas.so /usr/lib64/liblapack.so.3
+~/ephemeral-hdfs/bin/slaves.sh ln -sf /root/openblas-install/lib/libopenblas.so /usr/lib64/libblas.so.3
+
+rm /etc/ld.so.conf.d/atlas-x86_64.conf
+ldconfig
+ln -sf /root/openblas-install/lib/libopenblas.so /usr/lib64/liblapack.so.3
+ln -sf /root/openblas-install/lib/libopenblas.so /usr/lib64/libblas.so.3
+
+/root/spark/sbin/stop-all.sh
+
+~/ephemeral-hdfs/bin/slaves.sh rm -rf /root/spark/work
+~/ephemeral-hdfs/bin/slaves.sh mkdir -p /mnt/spark-work 
+~/ephemeral-hdfs/bin/slaves.sh ln -s /mnt/spark-work /root/spark/work
+
 popd
