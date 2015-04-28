@@ -6,7 +6,7 @@ export SPARK_LOCAL_DIRS="{{spark_local_dirs}}"
 # Standalone cluster options
 export SPARK_MASTER_OPTS=""
 export SPARK_WORKER_INSTANCES=1
-export SPARK_WORKER_CORES=8
+export SPARK_WORKER_CORES=10
 
 export OMP_NUM_THREADS=1
 
