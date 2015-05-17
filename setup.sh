@@ -114,4 +114,8 @@ for module in $MODULES; do
   cd /root/spark-ec2  # guard against setup.sh changing the cwd
 done
 
+# Run keystone setup
+echo "Setting up Keystone"
+source ./keystone/setup.sh
+
 popd > /dev/null
