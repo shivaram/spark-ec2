@@ -15,6 +15,9 @@ if [[ `curl -I https://api.github.com/repos/amplab/keystone 2>/dev/null | head -
   git stash
   git pull
   sbt/sbt assembly
+  make
+
+  /root/spark-ec2/copy-dir /root/keystone
 
   popd
 else
