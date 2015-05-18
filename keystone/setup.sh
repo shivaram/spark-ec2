@@ -50,3 +50,5 @@ ln -sf /root/openblas-install/lib/libopenblas.so /usr/lib64/libblas.so.3
 ~/spark/sbin/slaves.sh ln -s /mnt/spark-work /root/spark/work
 
 /root/spark/sbin/start-all.sh
+
+mkdir -p /mnt/spark-events
