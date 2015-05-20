@@ -10,12 +10,12 @@
 
   <property>
     <name>dfs.block.size</name>
-    <value>134217728</value>
+    <value>1342177280</value>
   </property>
 
   <property>
     <name>dfs.blocksize</name>
-    <value>134217728</value>
+    <value>5342177280</value>
   </property>
 
   <property>
