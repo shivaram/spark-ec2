@@ -2,27 +2,22 @@
 
 pushd /root
 
-# Check if we can clone keystone
-if [[ `curl -I https://api.github.com/repos/amplab/keystone 2>/dev/null | head -1 | awk '{print $2}'` == "200" ]]; then
-  # Checkout keystone
-  if [ ! -d "/root/keystone" ]; then
-    git clone https://github.com/amplab/keystone.git
-  fi
-
-  pushd /root/keystone
-
-  # Build keystone
-  git stash
-  git pull
-  sbt/sbt assembly
-  make
-
-  /root/spark-ec2/copy-dir /root/keystone
-
-  popd
-else
-  echo "Keystone repo cannot be accessed. Skipping clone and build."
+# Checkout keystone
+if [ ! -d "/root/keystone" ]; then
+  git clone https://github.com/shivaram/keystone.git -b imagenet-research
 fi
+
+pushd /root/keystone
+
+# Build keystone
+git stash
+git pull
+sbt/sbt assembly
+make
+
+/root/spark-ec2/copy-dir /root/keystone
+
+popd
 
 # Build openblas and link it correctly
 
