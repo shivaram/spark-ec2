@@ -53,6 +53,11 @@ worker_instances = int(os.getenv("SPARK_WORKER_INSTANCES", 1))
 # Distribute equally cpu cores among worker instances
 worker_cores = max(slave_cpus / worker_instances, 1)
 
+ec2_instance_type = os.popen("wget -q -O - http://169.254.169.254/latest/meta-data/instance-type").read().strip()
+
+if ec2_instance_type == "cc2.8xlarge":
+  worker_cores = 10
+
 template_vars = {
   "master_list": os.getenv("MASTERS"),
   "active_master": os.getenv("MASTERS").split("\n")[0],

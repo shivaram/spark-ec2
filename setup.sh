@@ -81,6 +81,18 @@ if [[ ! $MODULES =~ *scala* ]]; then
   MODULES=$(printf "%s\n%s\n" "scala" $MODULES)
 fi
 
+# Keystone specific HACKS
+EC2_INSTANCE_TYPE=`wget -q -O - http://169.254.169.254/latest/meta-data/instance-type`
+
+# Use only 2 disks for cc2.8xlarge as the AMI only mounts 2 of them
+if [[ "$EC2_INSTANCE_TYPE" == "cc2.8xlarge" ]]
+then
+  SPARK_LOCAL_DIRS="/mnt/spark,/mnt2/spark"
+  HDFS_DATA_DIRS="/mnt/ephemeral-hdfs/data,/mnt2/ephemeral-hdfs/data"
+  MAPRED_LOCAL_DIRS="/mnt/hadoop/mrlocal,/mnt2/hadoop/mrlocal"
+fi
+
+
 # Install / Init module
 for module in $MODULES; do
   echo "Initializing $module"
