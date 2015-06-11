@@ -55,7 +55,7 @@ worker_cores = max(slave_cpus / worker_instances, 1)
 
 ec2_instance_type = os.popen("wget -q -O - http://169.254.169.254/latest/meta-data/instance-type").read().strip()
 
-if ec2_instance_type == "cc2.8xlarge":
+if ec2_instance_type == "cc2.8xlarge" or ec2_instance_type == "cr1.8xlarge":
   worker_cores = 10
 
 template_vars = {

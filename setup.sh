@@ -85,11 +85,14 @@ fi
 EC2_INSTANCE_TYPE=`wget -q -O - http://169.254.169.254/latest/meta-data/instance-type`
 
 # Use only 2 disks for cc2.8xlarge as the AMI only mounts 2 of them
-if [[ "$EC2_INSTANCE_TYPE" == "cc2.8xlarge" ]]
+if [[ "$EC2_INSTANCE_TYPE" == "cc2.8xlarge" || "$EC2_INSTANCE_TYPE" == "cr1.8xlarge" ]]
 then
   SPARK_LOCAL_DIRS="/mnt/spark,/mnt2/spark"
   HDFS_DATA_DIRS="/mnt/ephemeral-hdfs/data,/mnt2/ephemeral-hdfs/data"
   MAPRED_LOCAL_DIRS="/mnt/hadoop/mrlocal,/mnt2/hadoop/mrlocal"
+  export SPARK_LOCAL_DIRS
+  export HDFS_DATA_DIRS
+  export MAPRED_LOCAL_DIRS
 fi
 
 
