@@ -34,15 +34,15 @@ system_ram_kb = min(slave_ram_kb, master_ram_kb)
 system_ram_mb = system_ram_kb / 1024
 # Leave some RAM for the OS, Hadoop daemons, and system caches
 if system_ram_mb > 100*1024:
-  spark_mb = system_ram_mb - 15 * 1024 # Leave 15 GB RAM
+  spark_mb = system_ram_mb - 20 * 1024 # Leave 20 GB RAM
 elif system_ram_mb > 60*1024:
-  spark_mb = system_ram_mb - 10 * 1024 # Leave 10 GB RAM
+  spark_mb = system_ram_mb - 15 * 1024 # Leave 15 GB RAM
 elif system_ram_mb > 40*1024:
-  spark_mb = system_ram_mb - 6 * 1024 # Leave 6 GB RAM
+  spark_mb = system_ram_mb - 10 * 1024 # Leave 10 GB RAM
 elif system_ram_mb > 20*1024:
-  spark_mb = system_ram_mb - 3 * 1024 # Leave 3 GB RAM
+  spark_mb = system_ram_mb - 6 * 1024 # Leave 5 GB RAM
 elif system_ram_mb > 10*1024:
-  spark_mb = system_ram_mb - 2 * 1024 # Leave 2 GB RAM
+  spark_mb = system_ram_mb - 4 * 1024 # Leave 4 GB RAM
 else:
   spark_mb = max(512, system_ram_mb - 1300) # Leave 1.3 GB RAM
 
