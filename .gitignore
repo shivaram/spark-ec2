@@ -36,3 +36,4 @@ nosetests.xml
 
 # JetBrains products
 .idea/
+*.DS_STORE
