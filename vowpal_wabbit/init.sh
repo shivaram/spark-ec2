@@ -9,8 +9,8 @@ rm 8.0.zip
 mv vowpal_wabbit-8.0 vowpal_wabbit
 
 # install the requirements
-sudo yum install boost-devel libtool
-sudo yum install zlib-devel
+sudo yum -q -y install boost-devel libtool
+sudo yum -q -y install zlib-devel
 
 # install vowpal wabbit
 cd vowpal_wabbit
