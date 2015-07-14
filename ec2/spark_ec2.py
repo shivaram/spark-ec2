@@ -93,6 +93,7 @@ DEFAULT_SPARK_GITHUB_REPO = "https://github.com/apache/spark"
 DEFAULT_SPARK_EC2_GITHUB_REPO = "https://github.com/tomerk/spark-ec2"
 DEFAULT_SPARK_EC2_BRANCH = "keystone-experiments"
 
+TOMER_EBS_VOL_ID = "vol-2e0381c4"
 
 def setup_external_libs(libs):
     """
@@ -188,7 +189,7 @@ def parse_args():
         "-r", "--region", default="us-east-1",
         help="EC2 region used to launch instances in, or to find them in (default: %default)")
     parser.add_option(
-        "-z", "--zone", default="",
+        "-z", "--zone", default="us-east-1a",
         help="Availability zone to launch instances in, or 'all' to spread " +
              "slaves across multiple (an additional $0.01/Gb for bandwidth" +
              "between zones applies) (default: a single zone chosen at random)")
@@ -776,6 +777,9 @@ def get_existing_cluster(conn, opts, cluster_name, die_on_error=True):
 # Deploy configuration files and run setup scripts on a newly launched
 # or started EC2 cluster.
 def setup_cluster(conn, master_nodes, slave_nodes, opts, deploy_ssh_key):
+    # Attach my ebs volume :D
+    conn.attach_volume(TOMER_EBS_VOL_ID, master_nodes[0].id, "/dev/sd" + chr(ord('s') + 7))
+
     master = get_dns_name(master_nodes[0], opts.private_ips)
     if deploy_ssh_key:
         print("Generating cluster's SSH key on master...")
@@ -793,7 +797,7 @@ def setup_cluster(conn, master_nodes, slave_nodes, opts, deploy_ssh_key):
             ssh_write(slave_address, opts, ['tar', 'x'], dot_ssh_tar)
 
     modules = ['spark', 'ephemeral-hdfs', 'persistent-hdfs',
-               'mapreduce', 'spark-standalone', 'tachyon', 'rstudio']
+               'mapreduce', 'spark-standalone', 'tachyon', 'rstudio', 'vowpal_wabbit']
 
     if opts.hadoop_major_version == "1":
         modules = list(filter(lambda x: x != "mapreduce", modules))
@@ -1288,8 +1292,8 @@ def real_main():
                       t=EC2_INSTANCE_TYPES[opts.instance_type]), file=stderr)
                 sys.exit(1)
 
-    if opts.ebs_vol_num > 8:
-        print("ebs-vol-num cannot be greater than 8", file=stderr)
+    if opts.ebs_vol_num > 6:
+        print("ebs-vol-num cannot be greater than 6", file=stderr)
         sys.exit(1)
 
     # Prevent breaking ami_prefix (/, .git and startswith checks)
