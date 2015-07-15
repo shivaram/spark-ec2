@@ -12,6 +12,9 @@ mv vowpal_wabbit-8.0 vowpal_wabbit
 sudo yum -q -y install boost-devel libtool
 sudo yum -q -y install zlib-devel
 
+# Hack to make sure keystone will still install properly after
+ln -s /usr/lib64/libgfortran.so.3 /usr/lib64/libgfortran.so
+
 # install vowpal wabbit
 cd vowpal_wabbit
 ./autogen.sh
