@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Install boost for Vowpal Wabbit
+sudo yum -q -y install boost-devel libtool
+sudo yum -q -y install zlib-devel
+
 # Disable Transparent Huge Pages (THP)
 # THP can result in system thrashing (high sys usage) due to frequent defrags of memory.
 # Most systems recommends turning THP off.
