@@ -3,16 +3,17 @@
 pushd /root
 
 # Check if we can clone keystone
-if [[ `curl -I https://api.github.com/repos/amplab/keystone 2>/dev/null | head -1 | awk '{print $2}'` == "200" ]]; then
+if [[ `curl -I https://api.github.com/repos/tomerk/keystone 2>/dev/null | head -1 | awk '{print $2}'` == "200" ]]; then
   # Checkout keystone
   if [ ! -d "/root/keystone" ]; then
-    git clone https://github.com/amplab/keystone.git
+    git clone https://github.com/tomerk/keystone.git
   fi
 
   pushd /root/keystone
 
   # Build keystone
   git stash
+  git checkout keystone-vw-experiments
   git pull
   sbt/sbt assembly
   make

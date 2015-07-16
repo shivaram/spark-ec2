@@ -51,7 +51,7 @@ else:
     raw_input = input
     xrange = range
 
-SPARK_EC2_VERSION = "1.4.0"
+SPARK_EC2_VERSION = "1.3.1"
 SPARK_EC2_DIR = os.path.dirname(os.path.realpath(__file__))
 
 VALID_SPARK_VERSIONS = set([
@@ -295,7 +295,7 @@ def parse_args():
         help="Additional tags to set on the machines; tags are comma-separated, while name and " +
              "value are colon separated; ex: \"Task:MySparkProject,Env:production\"")
     parser.add_option(
-        "--copy-aws-credentials", action="store_true", default=False,
+        "--copy-aws-credentials", action="store_true", default=True,
         help="Add AWS credentials to hadoop configuration to allow Spark to access S3")
     parser.add_option(
         "--subnet-id", default=None,
