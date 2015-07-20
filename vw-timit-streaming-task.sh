@@ -6,7 +6,7 @@ vwcmd="/root/vowpal_wabbit/vowpalwabbit/vw --total $mapred_map_tasks --node $map
 mapred_job_id=`echo $mapred_job_id | tr -d 'job_'`
 gdcmd="$vwcmd --unique_id $mapred_job_id --passes 1 --adaptive -d /dev/stdin -f tempmodel --ect 147"
 mapred_job_id=`expr $mapred_job_id \* 2` #create new nonce
-bfgscmd="$vwcmd --unique_id $mapred_job_id --bfgs --mem 5 --passes 2 -f model -i tempmodel"
+bfgscmd="$vwcmd --unique_id $mapred_job_id --bfgs --mem 5 --passes 20 -f model -i tempmodel"
 if [ "$mapper" == '000000' ]; then
     $gdcmd > mapperout 2>&1
     if [ $? -ne 0 ]; then
