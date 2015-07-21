@@ -11,8 +11,18 @@
   </property>
 
   <property>
+    <name>mapred.task.timeout</name>
+    <value>0</value>
+  </property>
+  
+  <property>
+    <name>mapreduce.task.timeout</name>
+    <value>0</value>
+  </property>
+
+  <property>
     <name>mapred.tasktracker.map.tasks.maximum</name>
-    <value>4</value>
+    <value>16</value>
     <description>The maximum number of map tasks that will be run
     simultaneously by a task tracker.
     </description>

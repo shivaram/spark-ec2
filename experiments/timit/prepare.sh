@@ -3,6 +3,7 @@ HADOOP=/root/mapreduce/bin/hadoop
 
 # Start mapreduce if necessary
 /root/mapreduce/bin/start-mapred.sh
+/root/ephemeral-hdfs/sbin/start-all.sh
 
 # Get the data from S3
 $HADOOP distcp s3n://timit-data/timit-train-features.csv /
