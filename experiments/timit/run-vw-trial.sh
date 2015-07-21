@@ -11,9 +11,10 @@ time KEYSTONE_MEM=97g /root/keystone/bin/run-pipeline.sh \
   pipelines.speech.VWTimitFeaturizer \
   --trainDataLocation /timit-train-features.csv \
   --trainLabelsLocation /timit-train-labels.sparse \
+  --trainOutLocation /$TIMESTAMP/train/data \
   --testDataLocation /timit-test-features.csv \
   --testLabelsLocation /timit-test-labels.sparse \
-  --vwFeaturesWriteLocation /$TIMESTAMP/data \
+  --testOutLocation /$TIMESTAMP/test/data \
   --numCores 512 \
   --numCosines 16
 
@@ -21,7 +22,7 @@ popd > /dev/null
 
 time /root/mapreduce/bin/hadoop jar /root/mapreduce/contrib/streaming/hadoop-streaming-2.0.0-mr1-cdh4.2.0.jar \
     -Dmapred.job.map.memory.mb=2000 \
-    -input /$TIMESTAMP/data \
+    -input /$TIMESTAMP/train/data \
     -output /$TIMESTAMP/out \
     -mapper /root/spark-ec2/experiments/timit/vw-streaming-task.sh \
     -reducer NONE
