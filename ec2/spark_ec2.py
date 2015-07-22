@@ -93,7 +93,7 @@ DEFAULT_SPARK_GITHUB_REPO = "https://github.com/apache/spark"
 DEFAULT_SPARK_EC2_GITHUB_REPO = "https://github.com/tomerk/spark-ec2"
 DEFAULT_SPARK_EC2_BRANCH = "keystone-experiments"
 
-TOMER_EBS_VOL_ID = "vol-2e0381c4"
+TOMER_EBS_VOL_ID = "vol-2f728f3a"
 
 def setup_external_libs(libs):
     """
@@ -186,10 +186,10 @@ def parse_args():
         "-m", "--master-instance-type", default="",
         help="Master instance type (leave empty for same as instance-type)")
     parser.add_option(
-        "-r", "--region", default="us-east-1",
+        "-r", "--region", default="us-west-2",
         help="EC2 region used to launch instances in, or to find them in (default: %default)")
     parser.add_option(
-        "-z", "--zone", default="us-east-1a",
+        "-z", "--zone", default="us-west-2b",
         help="Availability zone to launch instances in, or 'all' to spread " +
              "slaves across multiple (an additional $0.01/Gb for bandwidth" +
              "between zones applies) (default: a single zone chosen at random)")
