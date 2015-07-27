@@ -6,7 +6,7 @@ HADOOP=/root/mapreduce/bin/hadoop
 /root/ephemeral-hdfs/sbin/start-all.sh
 
 # Get the data from S3
-$HADOOP distcp s3n://files.sparks.west/data/amazon/ /amazon
+$HADOOP distcp s3n://files.sparks.west/data/amazon /amazon
 
 # Some more one-time setup so vw works correctly
 /root/spark/sbin/slaves.sh chmod -R ugo+rwx /root/vowpal_wabbit

@@ -8,7 +8,7 @@ OUTPUT_DIR=/vol7/timit-vw-$TIMESTAMP
 pushd /root/keystone > /dev/null
 export SPARK_HOME=/root/spark
 time KEYSTONE_MEM=97g /root/keystone/bin/run-pipeline.sh \
-  pipelines.text.AmazonReviewsVWFeaturizer \
+  pipelines.text.AmazonReviewsVWPreprocessor \
   --dataLocation /amazon \
   --trainOutLocation /$TIMESTAMP/train/data \
   --testOutLocation /$TIMESTAMP/test/data \
@@ -18,7 +18,7 @@ time /root/mapreduce/bin/hadoop jar /root/mapreduce/contrib/streaming/hadoop-str
     -Dmapred.job.map.memory.mb=2000 \
     -input /$TIMESTAMP/train/data \
     -output /$TIMESTAMP/out \
-    -mapper /root/spark-ec2/experiments/amazon/vw-streaming-task.sh \
+    -mapper /root/spark-ec2/experiments/amazon/vw-raw-streaming-task.sh \
     -reducer NONE
 
 mkdir $TIMESTAMP

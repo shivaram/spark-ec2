@@ -4,16 +4,14 @@ rm -f temp.cache
 date +"%F %T Start training mapper=$mapper" > /dev/stderr
 vwcmd="/root/vowpal_wabbit/vowpalwabbit/vw --total $mapred_map_tasks --node $mapper --cache_file temp.cache --span_server $mapreduce_job_submithost --loss_function=classic"
 mapred_job_id=`echo $mapred_job_id | tr -d 'job_'`
-gdcmd="$vwcmd --unique_id $mapred_job_id --passes 1 --adaptive -d /dev/stdin -f tempmodel --oaa 147 --learning_rate 0.0035"
+gdcmd="$vwcmd -b 25 --unique_id $mapred_job_id --passes 1 --sgd -d /dev/stdin -f model --oaa 147 -l 0.005"
 mapred_job_id=`expr $mapred_job_id \* 2` #create new nonce
-bfgscmd="$vwcmd --unique_id $mapred_job_id --bfgs --mem 5 --passes 20 -f model -i tempmodel"
 if [ "$mapper" == '000000' ]; then
     $gdcmd > mapperout 2>&1
     if [ $? -ne 0 ]; then
       date +"%F %T Failed mapper=$mapper cmd=$gdcmd" > /dev/stderr
       exit 1
     fi
-    $bfgscmd >> mapperout 2>&1
     outfile=$mapred_output_dir/model
     mapperfile=$mapred_output_dir/mapperout
     found=`/root/ephemeral-hdfs/bin/hadoop dfs -lsr / | grep $mapred_output_dir | grep mapperout`
@@ -33,6 +31,6 @@ else
       date +"%F %T Failed mapper=$mapper cmd=$gdcmd" > /dev/stderr
       exit 1
     fi
-    $bfgscmd
 fi
 date +"%F %T Done mapper=$mapper" > /dev/stderr
+
