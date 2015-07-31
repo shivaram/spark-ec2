@@ -9,7 +9,8 @@ pushd /root/keystone > /dev/null
 export SPARK_HOME=/root/spark
 time KEYSTONE_MEM=97g /root/keystone/bin/run-pipeline.sh \
   pipelines.text.AmazonReviewsVWFeaturizer \
-  --dataLocation /amazon \
+  --trainLocation /amazon/train \
+  --testLocation /amazon/test \
   --trainOutLocation /$TIMESTAMP/train/data \
   --testOutLocation /$TIMESTAMP/test/data \
   --numParts 512

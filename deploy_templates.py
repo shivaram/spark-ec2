@@ -27,7 +27,7 @@ slave_cpu_command = "ssh -t -o StrictHostKeyChecking=no %s %s" %\
 
 slave_ram_kb = int(os.popen(slave_mem_command).read().strip())
 
-slave_cpus = int(os.popen(slave_cpu_command).read().strip())
+slave_cpus = int(os.popen(slave_cpu_command).read().strip()) / 2
 
 system_ram_kb = min(slave_ram_kb, master_ram_kb)
 
