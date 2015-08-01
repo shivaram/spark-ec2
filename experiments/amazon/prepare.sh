@@ -6,7 +6,7 @@ HADOOP=/root/mapreduce/bin/hadoop
 /root/ephemeral-hdfs/sbin/start-all.sh
 
 # Get the data from S3
-$HADOOP distcp s3n://files.sparks.west/data/amazon /amazon/train
+$HADOOP distcp s3n://files.sparks.west/data/amazon/ /amazon/train
 /root/ephemeral-hdfs/bin/hadoop dfs -mkdir /amazon/test
 /root/ephemeral-hdfs/bin/hadoop dfs -mv /amazon/train/part-aam* /amazon/test/
 /root/ephemeral-hdfs/bin/hadoop dfs -mv /amazon/train/part-aal* /amazon/test/
