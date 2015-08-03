@@ -1,6 +1,10 @@
 spark-ec2
 =========
 
+*NOTE: As of August 2015 (Spark 1.5.0), this repository has been moved to the AMPLab github organization. 
+This repository no longer accepts new pull requests, and they should instead be submitted to
+https://github.com/amplab/spark-ec2.*
+
 This repository contains the set of scripts used to setup a Spark cluster on
 EC2. These scripts are intended to be used by the default Spark AMI and is *not*
 expected to work on other AMIs. If you wish to start a cluster using Spark,
