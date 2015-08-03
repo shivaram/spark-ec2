@@ -11,7 +11,7 @@ time KEYSTONE_MEM=97g /mnt/imagenet-keystone/bin/run-pipeline.sh \
   pipelines.images.imagenet.LazyImageNetSiftLcsFV \
   --trainLocation $IMAGENET_TRAIN_DIR \
   --testLocation $IMAGENET_VAL_DIR \
-  --labelPath $IMAGENET_LABELS \ 
+  --labelPath $IMAGENET_LABELS \
   --numPcaSamples 10000000 \
   --numGmmSamples 10000000
 
