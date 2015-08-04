@@ -3,6 +3,7 @@ git clone --single-branch --branch imagenet-research https://github.com/shivaram
 
 pushd /mnt/imagenet-keystone > /dev/null
 cp ~/keystone/sbt/sbt sbt/.
+make
 sbt/sbt assembly
 ~/spark-ec2/copy-dir /mnt/imagenet-keystone
 

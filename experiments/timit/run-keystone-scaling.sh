@@ -7,10 +7,7 @@ pushd /root/keystone > /dev/null
 for CLUSTER_SIZE in 16 24 32
 do
   # Change the cluster size
-  ~/spark/sbin/stop-all.sh
-  head -n $CLUSTER_SIZE /root/spark-ec2/slaves > ~/spark/conf/slaves
-  ~/spark-ec2/copy-dir ~/spark/conf/slaves
-  ~/spark/sbin/start-all.sh
+  ~/spark-ec2/experiments/resize-cluster.sh $CLUSTER_SIZE &> /dev/null
 
   # Run the trials at that cluster size
   for TRIAL in a b c
