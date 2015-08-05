@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+NUM_PARTS=${NUM_PARTS:-256}
 
 pushd /root/keystone > /dev/null
 export SPARK_HOME=/root/spark
@@ -9,8 +9,9 @@ time KEYSTONE_MEM=97g /root/keystone/bin/run-pipeline.sh \
   --trainLabelsLocation /timit-train-labels.sparse \
   --testDataLocation /timit-test-features.csv \
   --testLabelsLocation /timit-test-labels.sparse \
-  --numParts 512 \
-  --numCosines 16
+  --numParts $NUM_PARTS \
+  --numCosines 16 \
+  --numEpochs 1
 
 popd > /dev/null
 
