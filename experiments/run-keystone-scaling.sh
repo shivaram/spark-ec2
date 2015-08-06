@@ -1,6 +1,4 @@
 #!/bin/bash
-set -e
-
 EXPERIMENTS="amazon timit imagenet"
 CLUSTER_SIZES="128 64 32 16 8"
 
@@ -12,6 +10,8 @@ do
     ~/spark-ec2/experiments/$EXPERIMENT/prepare.sh
 done
 echo "Finished preparing the data"
+
+set -e
 
 # Execute the trials
 for CLUSTER_SIZE in $CLUSTER_SIZES
@@ -31,10 +31,10 @@ do
     ~/spark-ec2/experiments/$EXPERIMENT/run-keystone-trial.sh &> $LOG_FILE
 
     # grep for the important things
-    less $LOG_FILE | grep 'F1'
-    less $LOG_FILE | grep -i 'accuracy'
-    less $LOG_FILE | grep -i 'test error'
-    less $LOG_FILE | grep 'real'
+    less $LOG_FILE | grep 'F1' || true
+    less $LOG_FILE | grep -i 'accuracy' || true
+    less $LOG_FILE | grep -i 'test error' || true
+    less $LOG_FILE | grep 'real' || true
   done
 done
 
