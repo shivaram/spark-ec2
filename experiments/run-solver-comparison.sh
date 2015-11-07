@@ -1,6 +1,7 @@
 #!/bin/bash
-EXPERIMENTS="amazon timit imagenet"
-CLUSTER_SIZES="128 64 32 16 8"
+EXPERIMENTS="amazon timit"
+NON_EXACT_SOLVERS="block lbfgs"
+NUM_FEATURES_SET="1024 2048 4096 8192 16384"
 
 # Prepare the data
 echo "Preparing all the data"
@@ -12,29 +13,74 @@ echo "Finished preparing the data"
 
 set -e
 
-# Execute the trials
-for CLUSTER_SIZE in $CLUSTER_SIZES
+# Execute the non-exact trials
+for NUM_FEATURES in $NUM_FEATURES_SET
 do
-  # Change the cluster size
-  echo "Changing cluster to $CLUSTER_SIZE nodes"
-  ~/spark-ec2/experiments/resize-cluster.sh $CLUSTER_SIZE &> /dev/null
-
-  # Run the trials at that cluster size
-  export NUM_PARTS=$(( CLUSTER_SIZE * 8 > 256 ? CLUSTER_SIZE * 8 : 256 ))
-  for EXPERIMENT in $EXPERIMENTS
+  for SOLVER in $NON_EXACT_SOLVERS
   do
-    TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-    LOG_FILE=/vol7/$EXPERIMENT-$CLUSTER_SIZE-nodes-$TIMESTAMP.log
+    export NUM_PARTS=$(( 256 ))
+    export NUM_FEATURES=$NUM_FEATURES
+    export NUM_COSINES=$(( NUM_FEATURES / 1024 ))
 
-    echo "Writing to log file $LOG_FILE"
-    ~/spark-ec2/experiments/$EXPERIMENT/run-keystone-trial.sh &> $LOG_FILE
+    for EXPERIMENT in $EXPERIMENTS
+    do
+      TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+      LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$TIMESTAMP.log
 
-    # grep for the important things
-    less $LOG_FILE | grep -i 'Finished Solve' || true
-    less $LOG_FILE | grep 'F1' || true
-    less $LOG_FILE | grep -i 'accuracy' || true
-    less $LOG_FILE | grep -i 'train error' || true
-    less $LOG_FILE | grep 'real' || true
+      echo "Writing to log file $LOG_FILE"
+      ~/spark-ec2/experiments/$EXPERIMENT/run-$SOLVER-solver.sh &> $LOG_FILE
+
+      # grep for the important things
+      less $LOG_FILE | grep -i 'Finished Solve' || true
+      less $LOG_FILE | grep 'F1' || true
+      less $LOG_FILE | grep -i 'accuracy' || true
+      less $LOG_FILE | grep -i 'train error' || true
+      less $LOG_FILE | grep 'real' || true
+    done
   done
+done
+
+# Execute the exact trials
+SOLVER="exact"
+EXPERIMENT="timit"
+for NUM_FEATURES in "1024 2048 4096 8192" 
+do
+  export NUM_PARTS=$(( 256 ))
+  export NUM_FEATURES=$NUM_FEATURES
+  export NUM_COSINES=$(( NUM_FEATURES / 1024 ))
+
+  TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+  LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$TIMESTAMP.log
+
+  echo "Writing to log file $LOG_FILE"
+  ~/spark-ec2/experiments/$EXPERIMENT/run-$SOLVER-solver.sh &> $LOG_FILE
+
+  # grep for the important things
+  less $LOG_FILE | grep -i 'Finished Solve' || true
+  less $LOG_FILE | grep 'F1' || true
+  less $LOG_FILE | grep -i 'accuracy' || true
+  less $LOG_FILE | grep -i 'train error' || true
+  less $LOG_FILE | grep 'real' || true
+done
+
+EXPERIMENT="amazon"
+for NUM_FEATURES in "1024 2048" 
+do
+  export NUM_PARTS=$(( 256 ))
+  export NUM_FEATURES=$NUM_FEATURES
+  export NUM_COSINES=$(( NUM_FEATURES / 1024 ))
+
+  TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+  LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$TIMESTAMP.log
+
+  echo "Writing to log file $LOG_FILE"
+  ~/spark-ec2/experiments/$EXPERIMENT/run-$SOLVER-solver.sh &> $LOG_FILE
+
+  # grep for the important things
+  less $LOG_FILE | grep -i 'Finished Solve' || true
+  less $LOG_FILE | grep 'F1' || true
+  less $LOG_FILE | grep -i 'accuracy' || true
+  less $LOG_FILE | grep -i 'train error' || true
+  less $LOG_FILE | grep 'real' || true
 done
 
