@@ -43,7 +43,7 @@ done
 # Execute the exact trials
 SOLVER="exact"
 EXPERIMENT="timit"
-for NUM_FEATURES in "1024 2048 4096 8192" 
+for NUM_FEATURES in 1024 2048 4096 8192
 do
   export NUM_PARTS=$(( 256 ))
   export NUM_FEATURES=$NUM_FEATURES
@@ -64,7 +64,7 @@ do
 done
 
 EXPERIMENT="amazon"
-for NUM_FEATURES in "1024 2048" 
+for NUM_FEATURES in 1024 2048
 do
   export NUM_PARTS=$(( 256 ))
   export NUM_FEATURES=$NUM_FEATURES
