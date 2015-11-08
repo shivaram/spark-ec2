@@ -25,7 +25,7 @@ do
     for EXPERIMENT in $EXPERIMENTS
     do
       TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-      LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$TIMESTAMP.log
+      LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$NUM_FEATURES-$TIMESTAMP.log
 
       echo "Writing to log file $LOG_FILE"
       ~/spark-ec2/experiments/$EXPERIMENT/run-$SOLVER-solver.sh &> $LOG_FILE
@@ -50,7 +50,7 @@ do
   export NUM_COSINES=$(( NUM_FEATURES / 1024 ))
 
   TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-  LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$TIMESTAMP.log
+  LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$NUM_FEATURES-$TIMESTAMP.log
 
   echo "Writing to log file $LOG_FILE"
   ~/spark-ec2/experiments/$EXPERIMENT/run-$SOLVER-solver.sh &> $LOG_FILE
@@ -71,7 +71,7 @@ do
   export NUM_COSINES=$(( NUM_FEATURES / 1024 ))
 
   TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-  LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$TIMESTAMP.log
+  LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$NUM_FEATURES-$TIMESTAMP.log
 
   echo "Writing to log file $LOG_FILE"
   ~/spark-ec2/experiments/$EXPERIMENT/run-$SOLVER-solver.sh &> $LOG_FILE
