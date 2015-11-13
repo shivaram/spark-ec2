@@ -1,4 +1,4 @@
-y | sudo yum update binutils
+sudo yum update binutils
 
 # Have to call this part of keystone setup.sh again because of unclear bug in setup scripts...
 /root/matrix-bench/build-openblas-ec2.sh
