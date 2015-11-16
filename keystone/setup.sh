@@ -28,7 +28,7 @@ fi
 # Build openblas and link it correctly
 
 if [ ! -d "/root/matrix-bench" ]; then
-  git clone https://github.com/shivaram/matrix-bench.git
+  git clone https://github.com/tomerk/matrix-bench.git
 fi
 
 /root/matrix-bench/build-openblas-ec2.sh
