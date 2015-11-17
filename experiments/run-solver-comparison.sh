@@ -14,7 +14,7 @@ echo "Finished preparing the data"
 set -e
 
 # Execute the non-exact trials
-for NUM_FEATURES in $NUM_FEATURES_SET
+for EXPERIMENT in $EXPERIMENTS
 do
   for SOLVER in $NON_EXACT_SOLVERS
   do
@@ -22,7 +22,7 @@ do
     export NUM_FEATURES=$NUM_FEATURES
     export NUM_COSINES=$(( NUM_FEATURES / 1024 ))
 
-    for EXPERIMENT in $EXPERIMENTS
+    for NUM_FEATURES in $NUM_FEATURES_SET
     do
       TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
       LOG_FILE=/vol7/$EXPERIMENT-$SOLVER-solver-$NUM_FEATURES-$TIMESTAMP.log
@@ -35,6 +35,7 @@ do
       less $LOG_FILE | grep 'F1' || true
       less $LOG_FILE | grep -i 'accuracy' || true
       less $LOG_FILE | grep -i 'train error' || true
+      less $LOG_FILE | grep -i ' loss' || true
       less $LOG_FILE | grep 'real' || true
     done
   done
@@ -81,6 +82,7 @@ do
   less $LOG_FILE | grep 'F1' || true
   less $LOG_FILE | grep -i 'accuracy' || true
   less $LOG_FILE | grep -i 'train error' || true
+  less $LOG_FILE | grep -i ' loss' || true
   less $LOG_FILE | grep 'real' || true
 done
 
