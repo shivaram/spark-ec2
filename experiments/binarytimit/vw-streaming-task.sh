@@ -4,7 +4,7 @@ rm -f temp.cache
 date +"%F %T Start training mapper=$mapper" > /dev/stderr
 vwcmd="/root/vowpal_wabbit/vowpalwabbit/vw --total $mapred_map_tasks --node $mapper --cache_file temp.cache --span_server $mapreduce_job_submithost --loss_function classic"
 mapred_job_id=`echo $mapred_job_id | tr -d 'job_'`
-gdcmd="$vwcmd -b 25 --unique_id $mapred_job_id --passes 20 --sgd -d /dev/stdin -f model --oaa 147 -l 0.005"
+gdcmd="$vwcmd -b 25 --unique_id $mapred_job_id --passes 20 --sgd -d /dev/stdin -f model -l 0.005"
 mapred_job_id=`expr $mapred_job_id \* 2` #create new nonce
 if [ "$mapper" == '000000' ]; then
     $gdcmd > mapperout 2>&1
