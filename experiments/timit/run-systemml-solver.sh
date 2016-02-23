@@ -5,7 +5,7 @@ NUM_PARTS=${NUM_PARTS:-256}
 pushd /root/keystone > /dev/null
 export SPARK_HOME=/root/spark
 time KEYSTONE_MEM=97g /root/keystone/bin/run-pipeline.sh \
-  pipelines.speech.LBFGSSolveTimitPipeline \
+  pipelines.speech.SystemMLSolveTimitPipeline \
   --trainDataLocation /timit-train-features.csv \
   --trainLabelsLocation /timit-train-labels.sparse \
   --scriptLocation /root/keystone/bin/LinearRegCG.dml \
