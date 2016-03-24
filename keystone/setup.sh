@@ -14,7 +14,7 @@ if [[ `curl -I https://api.github.com/repos/amplab/keystone 2>/dev/null | head -
   # Build keystone
   git stash
   git pull
-  sbt/sbt assembly
+  SPARK_VERSION=1.3.1 SPARK_HADOOP_VERSION=2.0.0-mr1-cdh4.2.0 sbt/sbt clean assembly
   make
 
   /root/spark-ec2/copy-dir /root/keystone
